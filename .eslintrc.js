@@ -1,3 +1,5 @@
+const productionError = process.env.NODE_ENV === 'production' ? 'error' : 'warn';
+
 /**
  * eslint + prettier 校验代码
  * 1. [eslint rules](http://eslint.cn/docs/rules/)
@@ -22,7 +24,8 @@ module.exports = {
         semi: true
       }
     ],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': productionError,
+    'no-console': productionError,
     eqeqeq: ['error', 'always']
   },
 

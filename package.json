@@ -40,6 +40,7 @@
     "@vue/eslint-config-typescript": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
+    "core-js": "^3.8.3",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
@@ -57,8 +58,8 @@
     "sass-loader": "^7.1.0",
     "typescript": "~3.9.3",
     "vue-cli-plugin-element": "^1.0.1",
-    "webpack": "^4.44.2",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2"
   },
   "postcss": {
     "plugins": {
