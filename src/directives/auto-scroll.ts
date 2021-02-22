@@ -14,6 +14,7 @@ const AutoScroll: DirectiveOptions = {
   inserted(el, { value, modifiers, arg }) {
     const target = value ? el.querySelector(value) : el;
     if (target.children.length > 1) {
+      target.style.overflow = 'hidden';
       const { x } = modifiers;
       const speed = typeof arg === 'string' ? +arg : 1;
       let ownTranslate = (distance: number) =>
