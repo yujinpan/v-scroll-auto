@@ -33,10 +33,14 @@ const AutoScroll: DirectiveOptions = {
         if (surplus) {
           start += surplus;
         }
-        scroll(
+        const scrollRef = scroll(
           distance,
           ownTranslate,
           (surplus) => {
+            // 取消启动与停止事件
+            target.removeEventListener('mouseenter', scrollRef.stop);
+            target.removeEventListener('mouseleave', scrollRef.start);
+
             const firstChild = target.firstChild as HTMLElement;
             firstChild.remove();
             target.append(firstChild);
@@ -45,9 +49,12 @@ const AutoScroll: DirectiveOptions = {
           start,
           speed
         );
+        // 绑定启动与停止事件
+        target.addEventListener('mouseenter', scrollRef.stop);
+        target.addEventListener('mouseleave', scrollRef.start);
       };
       // 先初始化好位置，后面每一个元素都从边沿开始滚动
-      each(0);
+      requestAnimationFrame(() => each(0));
     }
   }
 };
@@ -62,16 +69,22 @@ function scroll(
   interval = 1
 ) {
   let moved = start;
+  let animate: number;
   const fn = () => {
+    animate = 0;
     next(moved);
     if (moved >= distance) {
       complete(moved - distance);
     } else {
       moved += interval;
-      requestAnimationFrame(fn);
+      animate = requestAnimationFrame(fn);
     }
   };
   fn();
+  return {
+    stop: () => cancelAnimationFrame(animate),
+    start: () => (animate = requestAnimationFrame(fn))
+  };
 }
 
 function translateChildren(target: HTMLElement, x: number, y: number) {
