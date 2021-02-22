@@ -3,15 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "./global.d.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.vue"
-  ]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.vue"]
 }
