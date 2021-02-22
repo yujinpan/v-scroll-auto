@@ -1,5 +1,15 @@
 import { DirectiveOptions } from 'vue';
 
+/**
+ * AutoScroll 自动滚动指令
+ * @example
+ * // default: speed = 1, target = current, axis = y
+ * <ul v-auto-scroll v-auto-scroll:1.x>
+ *   <li>1</li>
+ *   <li>2</li>
+ *   <li>3</li>
+ * </ul>
+ */
 const AutoScroll: DirectiveOptions = {
   inserted(el, { value, modifiers, arg }) {
     const target = value ? el.querySelector(value) : el;

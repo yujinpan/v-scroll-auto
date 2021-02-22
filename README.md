@@ -10,44 +10,61 @@ v-auto-scroll description
 npm install --save v-auto-scroll
 ```
 
-### Require element-ui
-
-If your project does not use element-ui,
-you need to introduce a separate element-ui package, like this:
-
-```js
-import 'v-auto-scroll/lib/element-ui';
-```
-
 ### Global registration
 
 ```js
-import Vue from 'vue';
-import Component from 'v-auto-scroll';
+import Vue from "vue";
+import AutoScroll from "v-auto-scroll";
 
-Vue.use(Component);
+Vue.use(AutoScroll);
 ```
 
 ### In-component registration
 
 ```js
-import Component from 'v-auto-scroll';
+import AutoScroll from "v-auto-scroll";
 
 export default {
-  components: {
-    Component
+  directives: {
+    AutoScroll
   }
 };
 ```
 
+### Directive Attrs
+
+- `value` - target element, example: `<div v-auto-scroll='ul'><ul>...</ul></div>`
+- modifier `x` - use x axis, example: `<ul v-auto-scroll.x>...</ul>`
+- argument - speed, example: `<ul v-auto-scroll:10></ul>`
+
 ### Complete example
 
-```xml
+```vue
 <template>
-  <div></div>
+  <div>
+    <ul class="cm-list-unstyled cm-padding-medium" v-auto-scroll>
+      <li class="cm-margin-top-base" v-for="item in 5" :key="item">
+        <el-button>{{ item }}</el-button>
+      </li>
+    </ul>
+    <ul
+      class="cm-list-unstyled cm-flex cm-padding-large cm-border-base"
+      v-auto-scroll:5.x
+    >
+      <li v-for="item in 10" :key="item">
+        <el-button style="width: 200px;" type="primary">{{ item }} </el-button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-export default {};
+import { AutoScroll } from "v-auto-scroll";
+
+export default {
+  directives: {
+    AutoScroll
+  }
+};
 </script>
 ```
