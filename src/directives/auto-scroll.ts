@@ -33,28 +33,43 @@ const AutoScroll: DirectiveOptions = {
         if (surplus) {
           start += surplus;
         }
-        const scrollRef = scroll(
-          distance,
-          ownTranslate,
-          (surplus) => {
-            // 取消启动与停止事件
-            target.removeEventListener('mouseenter', scrollRef.stop);
-            target.removeEventListener('mouseleave', scrollRef.start);
+        if (distance) {
+          let scrollRef = (target.__auto_scroll__ = scroll(
+            distance,
+            ownTranslate,
+            (surplus) => {
+              // 取消启动与停止事件
+              target.removeEventListener('mouseenter', scrollRef.stop);
+              target.removeEventListener('mouseleave', scrollRef.start);
+              // @ts-ignore
+              scrollRef = null;
 
-            const firstChild = target.firstChild as HTMLElement;
-            firstChild.remove();
-            target.append(firstChild);
-            each(1, surplus);
-          },
-          start,
-          speed
-        );
-        // 绑定启动与停止事件
-        target.addEventListener('mouseenter', scrollRef.stop);
-        target.addEventListener('mouseleave', scrollRef.start);
+              const firstChild = target.firstChild as HTMLElement;
+              firstChild.remove();
+              target.append(firstChild);
+              each(1, surplus);
+            },
+            start,
+            speed
+          ));
+          // 绑定启动与停止事件
+          target.addEventListener('mouseenter', scrollRef.stop);
+          target.addEventListener('mouseleave', scrollRef.start);
+        }
       };
       // 先初始化好位置，后面每一个元素都从边沿开始滚动
       requestAnimationFrame(() => each(0));
+    }
+  },
+  unbind(el, { value, modifiers, arg }) {
+    const target = value ? el.querySelector(value) : el;
+    if (target && target.__auto_scroll__) {
+      const scrollRef = target.__auto_scroll__;
+      scrollRef.stop();
+      // 取消启动与停止事件
+      target.removeEventListener('mouseenter', scrollRef.stop);
+      target.removeEventListener('mouseleave', scrollRef.start);
+      delete target.__auto_scroll__;
     }
   }
 };
@@ -82,8 +97,15 @@ function scroll(
   };
   fn();
   return {
-    stop: () => cancelAnimationFrame(animate),
-    start: () => (animate = requestAnimationFrame(fn))
+    stop: () => {
+      cancelAnimationFrame(animate);
+      animate = 0;
+    },
+    start: () => {
+      if (animate === 0) {
+        animate = requestAnimationFrame(fn);
+      }
+    }
   };
 }
 
