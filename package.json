@@ -21,13 +21,7 @@
     "core-js": "^3.x",
     "vue": "^2.x"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.x",
-    "style-inject": "^0.x",
-    "vue-class-component": "^7.x",
-    "vue-property-decorator": "^8.x",
-    "vue-runtime-helpers": "^1.x"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "^3.6.0",
     "@vue/cli-plugin-babel": "^4.5.9",
