@@ -3,6 +3,7 @@ node_modules
 stat
 package-lock.json
 dist
+types
 
 # local env files
 .env.local
