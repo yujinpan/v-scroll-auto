@@ -9,6 +9,14 @@
     "types",
     "README.md"
   ],
+  "keywords": [
+    "vue",
+    "directives",
+    "auto-scroll",
+    "scroll-news",
+    "scroll",
+    "infinite"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "cross-env NODE_ENV=production rollupx && eslint --fix types/**/*.d.ts",
