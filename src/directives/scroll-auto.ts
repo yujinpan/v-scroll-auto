@@ -1,16 +1,16 @@
 import { DirectiveOptions } from 'vue';
 
 /**
- * AutoScroll 自动滚动指令
+ * ScrollAuto 自动滚动指令
  * @example
  * // default: speed = 1, target = current, axis = y
- * <ul v-auto-scroll v-auto-scroll:1.x>
+ * <ul v-scroll-auto v-scroll-auto:1.x>
  *   <li>1</li>
  *   <li>2</li>
  *   <li>3</li>
  * </ul>
  */
-const AutoScroll: DirectiveOptions = {
+const ScrollAuto: DirectiveOptions = {
   inserted(el, { value, modifiers, arg }) {
     const target = value ? el.querySelector(value) : el;
     if (target.children.length > 1) {
@@ -85,7 +85,7 @@ const AutoScroll: DirectiveOptions = {
   }
 };
 
-export default AutoScroll;
+export default ScrollAuto;
 
 function scroll(
   distance: number,

@@ -1,9 +1,9 @@
-import AutoScroll from './directives/auto-scroll';
+import ScrollAuto from './directives/scroll-auto';
 import { VueConstructor } from 'vue';
 
 // @ts-ignore
-AutoScroll.install = (Vue: VueConstructor) => {
-  Vue.directive('auto-scroll', AutoScroll);
+ScrollAuto.install = (Vue: VueConstructor) => {
+  Vue.directive('scroll-auto', ScrollAuto);
 };
 
-export default AutoScroll;
+export default ScrollAuto;
